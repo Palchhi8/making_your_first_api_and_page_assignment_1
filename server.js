@@ -2,6 +2,37 @@
 const express = require('express');
 const app = express();
 
+app.get("/assistant/greet",(req,res)=>{
+  const name = req.query.name;
+  const day = new Date().getDay();
+  if(day==1){
+    let obj ={
+    "welcomeMessage":`Hello, ${name}! Welcome to our assistant app!`,
+    "dayMessage": "Happy Monday! Start your week with energy!"
+  }
+  return res.send(obj);
+  }
+  else if(day==5){
+    let obj ={
+      "welcomeMessage":`Hello, ${name}! Welcome to our assistant app!`,
+    "dayMessage": "It's Friday! The weekend is near!"
+  }
+  return res.send(obj);
+  }
+  else{
+  let obj ={
+    "welcomeMessage":`Hello, ${name}! Welcome to our assistant app!`,
+    "dayMessage": "Have a wonderful day!"
+  }
+  return res.send(obj);
+  }
+})
+
+app.get('/',function(req,res){
+  return res.send('<h1>Hello world </h1>')
+})
+
+
 /*
 Task:
 You need to build an API for a virtual assistant that provides customized responses.
@@ -32,7 +63,6 @@ Example Responses:
 
 Add the required logic below to complete the API.
 */
-
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Virtual Assistant API is running on http://localhost:${PORT}`);
